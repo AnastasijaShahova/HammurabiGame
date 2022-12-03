@@ -33,7 +33,7 @@ void Loader::Run(const std::string& save_file_path)
             is_play = game_play.PlayYear();
             if (is_play && !game_value->is_ended)
             {
-                if (text_message.ContinueGame())
+                if (!text_message.ContinueGame())
                     return;
                 SaveGame(game_value, save_file_path);
             }
