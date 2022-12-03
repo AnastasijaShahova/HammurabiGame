@@ -1,5 +1,6 @@
 #ifndef TextMessages_hpp
 #define TextMessages_hpp
+
 #include "EGameResult.h"
 
 enum EReasonForError {

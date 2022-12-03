@@ -1,7 +1,7 @@
 #ifndef Loader_hpp
 #define Loader_hpp
 
-#include "GamePLay.hpp"
+#include "GamePlay.hpp"
 #include <string>
 
 class Loader

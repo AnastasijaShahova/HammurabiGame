@@ -1,7 +1,7 @@
 #ifndef EGameResult_h
 #define EGameResult_h
 
-enum EGameResult {
+enum class EGameResult {
     Bad,
     Satisfactorily,
     Good,

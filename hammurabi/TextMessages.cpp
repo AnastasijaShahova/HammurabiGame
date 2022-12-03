@@ -1,6 +1,7 @@
 #include "TextMessages.hpp"
-#include "GamePLay.hpp"
+#include "GamePlay.hpp"
 #include <iostream>
+#include <string>
 
 void TextMessage::FirstMessageInFirstYear(const GameValue *value) const
 {
@@ -30,23 +31,23 @@ void TextMessage::FirstMessage(const GameValue *value) const
               << "\tОдин акр земли стоит " << value->acre_price << " бушелей" << std::endl;
 }
 
-void TextMessage::ShowGameResult(const float deaath_rate_avg, const float acre_per_person,const EGameResult game_res) const
+void TextMessage::ShowGameResult(const float deaath_rate_avg, const float acre_per_person, const EGameResult game_res) const
 {
     std::cout << "Вот и закончилось Ваше правление\n"
               << "Среднегодовой процент умерших составил " << static_cast<int>(deaath_rate_avg * 100) << " % населения\n"
               << "На одного жителя приходится  " << acre_per_person << " акров земли" << std::endl;
 
     switch (game_res) {
-    case Bad:
+    case EGameResult::Bad:
         std::cout << "Из-за вашей некомпетентности в управлении, народ устроил бунт, и изгнал вас их города. Теперь вы вынуждены влачить жалкое существование в изгнании" << std::endl;
         break;
-    case Satisfactorily:
+    case EGameResult::Satisfactorily:
         std::cout << "Вы правили железной рукой, подобно Нерону и Ивану Грозному. Народ вздохнул с облегчением, и никто больше не желает видеть вас правителем" << std::endl;
         break;
-    case Good:
+    case EGameResult::Good:
         std::cout << "Вы справились вполне неплохо,у вас, конечно, есть недоброжелатели, но многие хотели бы увидеть вас во главе города снова" << std::endl;
         break;
-    case Perfect:
+    case EGameResult::Perfect:
         std::cout << "Фантастика! Карл Великий, Дизраэли и Джефферсон вместе не справились бы лучше" << std::endl;
         break;
     default:
@@ -58,15 +59,14 @@ int TextMessage::CheckInput() const
 {
     std::string number = "";
     int output = -1;
-    do
+    do 
     {
         std::cin >> number;
-        try
+        try 
         {
             output = std::stoi(number);
-            
         }
-        catch (...)
+        catch (...) 
         {
             std::cout << "Введите целое положительное число" << std::endl;
         }
@@ -158,5 +158,3 @@ void TextMessage::InvalidParametrMessage(const EReasonForError &reason) const
         break;
     }
 }
-
-

@@ -1,6 +1,6 @@
-#include "GamePLay.hpp"
+#include "GamePlay.hpp"
 #include "Random.h"
-#include<iostream>
+#include <iostream>
 
 GamePlay::GamePlay(GameConditions *conditions, GameValue *game_value, TextMessage *text_message) :
     conditions_(conditions), game_value_(game_value), text_message_(text_message)
@@ -65,15 +65,15 @@ void GamePlay::CalculateValueForNextYear() const
 
     game_value_->arrived_person = std::max(std::min(static_cast<int>(arrived_persons),conditions_->max_arrive_people), conditions_->min_arrive_people);
 
-     game_value_->population =  game_value_->population - game_value_->died_person + game_value_->arrived_person;
+    game_value_->population =  game_value_->population - game_value_->died_person + game_value_->arrived_person;
 
 
-     game_value_->is_plague = generator.random(0.0f, 1.0f).Mt19937() <= conditions_->chance_plague;
-     if (game_value_->is_plague)
-         game_value_->population = game_value_->population / 2;
+    game_value_->is_plague = generator.random(0.0f, 1.0f).Mt19937() <= conditions_->chance_plague;
+    if (game_value_->is_plague)
+        game_value_->population = game_value_->population / 2;
 
-     ++game_value_->year;
-     CheckGameEnd(death_rate_in_this_year);
+    ++game_value_->year;
+    CheckGameEnd(death_rate_in_this_year);
 }
 
 void GamePlay::CheckGameEnd(const float death_rate_in_this_year) const
@@ -81,10 +81,9 @@ void GamePlay::CheckGameEnd(const float death_rate_in_this_year) const
     if (death_rate_in_this_year > conditions_->death_rate)
     {
         game_value_->is_ended = true;
-        game_value_->game_result = Bad;
+        game_value_->game_result = EGameResult::Bad;
         game_value_->death_rate_avg = game_value_->sum_death_rate / (game_value_->year );
         game_value_->acre_per_person = static_cast<float>(game_value_->acre_city) / game_value_->population;
-        
     }
 
     if (game_value_->year == conditions_->rounds_count)
@@ -100,13 +99,13 @@ void GamePlay::CalculateResult() const
     game_value_->acre_per_person = static_cast<float>(game_value_->acre_city) / game_value_->population;
 
     if (game_value_->death_rate_avg > 0.33f &&  game_value_->acre_per_person < 7)
-        game_value_->game_result = Bad;
+        game_value_->game_result = EGameResult::Bad;
     else if (game_value_->death_rate_avg > 0.1f &&  game_value_->acre_per_person < 9)
-        game_value_->game_result = Satisfactorily;
+        game_value_->game_result = EGameResult::Satisfactorily;
     else if (game_value_->death_rate_avg > 0.03f &&  game_value_->acre_per_person < 10)
-        game_value_->game_result = Good;
+        game_value_->game_result = EGameResult::Good;
     else
-        game_value_->game_result = Perfect;
+        game_value_->game_result = EGameResult::Perfect;
 }
 
 void GamePlay::CheckValidInput(int &millet_for_person, int &acre_to_cultivate) const

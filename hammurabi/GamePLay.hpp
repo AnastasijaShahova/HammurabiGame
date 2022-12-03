@@ -1,7 +1,5 @@
-#ifndef GamePLay_hpp
-#define GamePLay_hpp
-
-#include <stdio.h>
+#ifndef GamePlay_hpp
+#define GamePlay_hpp
 
 #include "GameConditions.h"
 #include "TextMessages.hpp"
@@ -55,4 +53,4 @@ private:
 };
 
 
-#endif /* GamePLay_hpp */
+#endif /* GamePlay_hpp */
